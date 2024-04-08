@@ -1,0 +1,33 @@
+{
+    // PowerShellの実行ポリシーを緩めて仮想環境の起動スクリプトを実行できるようにする
+    "terminal.integrated.env.windows": {
+        "PSExecutionPolicyPreference": "RemoteSigned"
+    },
+    // ターミナル起動時に仮想環境も起動する (blackなどパッケージのコマンドを使えるようになります)
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    // デフォルトのPythonインタープリターを仮想環境のものにする
+    // "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    // 構文チェックを行うようにする
+    "python.linting.enabled": false,
+    // 保存時に構文チェックを行う
+    "python.linting.lintOnSave": false,
+    // 構文チェックをpylintで行わないようにする (※規定値がtrueなため)
+    "python.linting.pylintEnabled": false,
+    // 構文チェックをflake8で行うようにする
+    "python.linting.flake8Enabled": false,
+    // flake8のパス (※pyproject-flake8を導入している場合はpflake8で上書きする必要があるため)
+    // "python.linting.flake8Path": "${workspaceFolder}\\.venv\\Scripts\\pflake8.exe",
+    // mypyを有効化する
+    "python.linting.mypyEnabled": false,
+    // フォーマットをblackで行うようにする
+    "python.formatting.provider": "black",
+    // pythonファイルの設定
+    "[python]": {
+        // 保存時にimport文のソートなどを行う
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": false
+        },
+        // 保存時にフォーマットを行う
+        "editor.formatOnSave": false,
+    }
+}
