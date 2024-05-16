@@ -35,5 +35,12 @@ export const AXIOS_ERROR: string = "ERROR";
  */
 export const TOKEN_ID: string = "JsonWebToken";
 
+/**
+ * ローカルストレージ.ユーザー名
+ */
+export const USER_NAME: string = "userName";
+
+
+
 
 

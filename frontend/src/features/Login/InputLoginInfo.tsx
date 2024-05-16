@@ -1,5 +1,6 @@
 import React, { FormEventHandler } from "react";
 import { useAppState } from '../../pages/Login/AuthProvider';
+import { Button, TextField } from "@mui/material";
 
 export type typeLoginInfo = { userName: string; password: string; };
 
@@ -17,26 +18,35 @@ const InputLoginInfo: React.FC<InputLoginInfoProps> = ({
 
     return (
         <form onSubmit={handleLogin}>
-            <label>
-                ユーザー名:
-                <input type="text"
-                    value={userName}
-                    onChange={(e) => {
-                        e.preventDefault();
-                        setUserName(e.target.value);
-                    }} />
-            </label><br />
-            <label>
-                パスワード:
-                <input type="text"
-                    value={password}
-                    onChange={(e) => {
-                        e.preventDefault();
-                        setPassword(e.target.value);
-                    }} />
-            </label><br />
-            <input type="submit" value="ログイン" />
-        </form>
+        <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth label="ユーザー名"
+            onChange={(e) => {
+                e.preventDefault();
+                setUserName(e.target.value);
+            }}
+            value={userName}
+        />
+        <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth label="パスワード" type="password"
+            onChange={(e) => {
+                e.preventDefault();
+                setPassword(e.target.value);
+            }}
+            value={password}
+        />
+        <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            type="submit"
+        >
+            ログイン
+        </Button>
+    </form>
     );
 };
 

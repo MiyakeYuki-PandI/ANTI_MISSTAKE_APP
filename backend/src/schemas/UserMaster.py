@@ -11,7 +11,7 @@ class UserMasterCreate(UserMasterBase):
 
 
 class UserMaster(UserMasterBase):
-    user_id: str
+    user_id: int
     user_name: str
 
     class Config:

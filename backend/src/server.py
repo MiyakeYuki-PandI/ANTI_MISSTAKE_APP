@@ -6,8 +6,8 @@ import os
 # 環境変数の読み込み
 load_dotenv()
 
-#ルーターの読み込み
-from .routers import auth, cause, _class
+# ルーターの読み込み
+from .routers import auth, cause, _class, misstake_history
 
 app = FastAPI()
 
@@ -23,7 +23,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#ルーテイィング
+# ルーティング
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(cause.router, prefix="/cause", tags=["cause"])
 app.include_router(_class.router, prefix="/class", tags=["class"])
+app.include_router(misstake_history.router, prefix="/misstakehistory", tags=["misstakehistory"])

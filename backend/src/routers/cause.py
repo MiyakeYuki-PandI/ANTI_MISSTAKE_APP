@@ -40,9 +40,9 @@ def cause_to_dict(cause):
         cause (CauseMaster): CauseMaster(obj)
 
     Returns:
-        Array: {"causeId": int, "causeName": str}
+        Array: {"value": int, "labal": str}
     """
     return {
-        "causeId": cause.cause_id,
-        "causeName": cause.cause_name
+        "value": cause.cause_id,
+        "label": cause.cause_name
     }

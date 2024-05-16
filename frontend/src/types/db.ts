@@ -2,13 +2,13 @@
  * 原因マスターの型
  */
 export type typeCauseMaster = {
-    causeId: number;
-    causeName: string;
+    value: number;
+    label: string;
 }
 /**
  * 分類マスターの型
  */
 export type typeClassMaster = {
-    classId: number;
-    className: string;
+    value: number;
+    label: string;
 }

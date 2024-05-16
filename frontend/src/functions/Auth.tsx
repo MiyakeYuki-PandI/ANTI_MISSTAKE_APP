@@ -3,24 +3,39 @@ import {
     Navigate,
     useLocation
 } from "react-router-dom";
-import { typeSendData } from "../../types/types";
-import { AXIOS_ERROR, TOKEN_ID } from "../const";
+import { typeSendData } from "../types/types";
+import { AXIOS_ERROR, TOKEN_ID, USER_NAME } from "../const";
 
-export const setToken = (token: string) => {
+export const setLocalStorageToken = (token: string) => {
     // set token in localStorage
-    localStorage.setItem(TOKEN_ID, token)
-}
-export const fetchToken = () => {
+    localStorage.setItem(TOKEN_ID, token);
+};
+export const fetchLocalStorageToken = () => {
     // fetch the token
-    return localStorage.getItem(TOKEN_ID)
+    return localStorage.getItem(TOKEN_ID);
+};
+
+export const setLocalStorageUserName = (userName: string) => {
+    // set userName in localStorage
+    localStorage.setItem(USER_NAME, userName);
 }
+export const fetchLocalStorageUserName = () => {
+    // fetch the userName
+    return localStorage.getItem(USER_NAME);
+}
+/**
+ * ローカルストレージのアイテム全削除
+ */
+export const cleaLocalStorage = () => {
+    localStorage.clear();
+};
 
 type RequireTokenProps = {
     children: React.ReactNode;
 };
 export const RequireToken: React.FC<RequireTokenProps> = ({ children }) => {
 
-    let auth = fetchToken()
+    let auth = fetchLocalStorageToken()
     let location = useLocation();
 
     if (!auth) {
@@ -37,7 +52,7 @@ export const RequireToken: React.FC<RequireTokenProps> = ({ children }) => {
  * @returns status<>ERROR：通信成功、status==ERROR：通信エラー
  */
 export const checkTokenToEndPoint = async (): Promise<{ "status": string }> => {
-    console.log('▼----- Start LoginFunction checkToken -----▼');
+    console.log('▼----- Start LoginFunction checkTokenToEndPoint -----▼');
     console.log('Input:', JSON.stringify({ token: localStorage.getItem(TOKEN_ID) }));
     try {
         // postで送るデータ
@@ -58,7 +73,7 @@ export const checkTokenToEndPoint = async (): Promise<{ "status": string }> => {
         }
 
         // 回答の取得
-        console.log('▲----- Finish ChatGptFunction checkToken -----▲');
+        console.log('▲----- Finish ChatGptFunction checkTokenToEndPoint -----▲');
         return await response.json();
 
     } catch (error) {
@@ -67,7 +82,7 @@ export const checkTokenToEndPoint = async (): Promise<{ "status": string }> => {
         } else {
             console.error('Fetch error:', error);
         }
-        console.log('▲----- Error ChatGptFunction checkToken -----▲');
+        console.log('▲----- Error ChatGptFunction checkTokenToEndPoint -----▲');
         return { "status": AXIOS_ERROR };
     }
 }

@@ -40,9 +40,9 @@ def class_to_dict(_class):
         _class (ClassMaster): ClassMaster(obj)
 
     Returns:
-        Array: {"classId": int, "className": str}
+        Array: {"value": int, "labal": str}
     """
     return {
-        "classId": _class.class_id,
-        "className": _class.class_name
+        "value": _class.class_id,
+        "label": _class.class_name
     }

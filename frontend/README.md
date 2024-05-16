@@ -21,7 +21,7 @@ npm install npm install @mui/material @emotion/react @emotion/styled
 ```
 firebase login
 npm run build
-firebase deploy
+firebase deploy --only hosting:anti-misstake-app
 ```
 
 参考：<https://yoheiko.com/blog/post-769/>
@@ -49,4 +49,45 @@ configsを除く6つのディレクトリの依存関係は以下\
 ※空文字が格納されている変数は各自の環境に合わせて設定する．\
 ```
 REACT_APP_BACKEND_SERVER_URL=""
+```
+
+## 備忘録
+### 1つのFirebaseプロジェクト内に2のサイトを用意し、2つ目のサイトにdeployしてもサイトが表示されない。
+試したのは以下のコマンド
+```
+firebase deploy --only hosting:anti-misstake-app
+```
+また、firebase.jsonは以下のようにsite属性を追加
+```firebase.json
+{
+  "hosting": {
+    "site": "anti-misstake-app",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
+```
+解決策：以下のようにfirebase.jsonを書き換える
+```firebase.json
+{
+  "hosting": {
+    "site": "anti-misstake-app",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
 ```

@@ -1,5 +1,5 @@
-import { typeCauseMaster, typeClassMaster } from "../../../types/db";
-import { typeSendData } from "../../../types/types";
+import { typeCauseMaster, typeClassMaster } from "../../types/db";
+import { typeSendData } from "../../types/types";
 import { AXIOS_ERROR, TOKEN_ID } from "../../const";
 
 /**
@@ -76,6 +76,55 @@ export const feachClass = async (): Promise<{ "status": string, "classList"?: ty
             console.error('Fetch error:', error);
         }
         console.log('▲----- Error HomeFunction feachClass -----▲');
+        return { 'status': AXIOS_ERROR };
+    }
+}
+
+/**
+ * ミス履歴を登録
+ * 
+ * @returns 
+ */
+export const createMisstakeHistory = async (
+    classId: number,
+    causeId: number,
+    contents: string,
+    plan: string
+): Promise<{ "status": string }> => {
+    console.log('▼----- Start HomeFunction createMisstakeHistory -----▼');
+    try {
+        // postで送るデータ
+        const sendData: typeSendData = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                class_id: classId,
+                cause_id: causeId,
+                contents: contents,
+                plan: plan
+            }),
+        };
+
+        // エンドポイントにリクエスト送信
+        const response = await fetch(process.env.REACT_APP_BACKEND_SERVER_URL + '/misstakehistory/create', sendData);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // 回答の取得
+        console.log('▲----- Finish HomeFunction createMisstakeHistory -----▲');
+        return await response.json();
+
+    } catch (error) {
+        if (error === 'AbortError') {
+            console.log('Fetch aborted');
+        } else {
+            console.error('Fetch error:', error);
+        }
+        console.log('▲----- Error HomeFunction createMisstakeHistory -----▲');
         return { 'status': AXIOS_ERROR };
     }
 }

@@ -1,4 +1,4 @@
-import { typeSendData } from '../../../types/types';
+import { typeSendData } from '../../types/types';
 import { AXIOS_ERROR } from '../../const';
 
 /**
@@ -12,7 +12,7 @@ export const feachLoginInfo = async (
     userName: string,
     password: string
 ): Promise<{ "status": string, "token"?: string }> => {
-    console.log('▼----- Start LoginFunction feachLoginInfo -----▼');
+    console.log('▼----- Start LoginFunc feachLoginInfo -----▼');
     console.log('Input', JSON.stringify({ userName: userName, password: password }));
     try {
         // postで送るデータ
@@ -32,7 +32,7 @@ export const feachLoginInfo = async (
         }
 
         // 回答の取得
-        console.log('▲----- Finish ChatGptFunction feachLoginInfo -----▲');
+        console.log('▲----- Finish LoginFunc feachLoginInfo -----▲');
         return await response.json();
 
     } catch (error) {
@@ -41,7 +41,7 @@ export const feachLoginInfo = async (
         } else {
             console.error('Fetch error:', error);
         }
-        console.log('▲----- Error ChatGptFunction feachLoginInfo -----▲');
+        console.log('▲----- Error LoginFunc feachLoginInfo -----▲');
         return { 'status': AXIOS_ERROR };
     }
 }
