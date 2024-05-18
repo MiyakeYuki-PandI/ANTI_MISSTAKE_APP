@@ -1,4 +1,4 @@
-import { typeCauseMaster, typeClassMaster } from "../../types/db";
+import { typeCauseMaster, typeCategoryMaster } from "../../types/db";
 import { typeSendData } from "../../types/types";
 import { AXIOS_ERROR, TOKEN_ID } from "../../const";
 
@@ -46,8 +46,8 @@ export const feachCause = async (): Promise<{ "status": string, "causeList"?: ty
  * 
  * @returns 
  */
-export const feachClass = async (): Promise<{ "status": string, "classList"?: typeClassMaster[] }> => {
-    console.log('▼----- Start HomeFunction feachClass -----▼');
+export const feachCategory = async (): Promise<{ "status": string, "categoryList"?: typeCategoryMaster[] }> => {
+    console.log('▼----- Start HomeFunction feachCategory -----▼');
     try {
         // postで送るデータ
         const sendData: typeSendData = {
@@ -59,14 +59,14 @@ export const feachClass = async (): Promise<{ "status": string, "classList"?: ty
         };
 
         // エンドポイントにリクエスト送信
-        const response = await fetch(process.env.REACT_APP_BACKEND_SERVER_URL + '/class/fetchclass', sendData);
+        const response = await fetch(process.env.REACT_APP_BACKEND_SERVER_URL + '/category/fetchcategory', sendData);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         // 回答の取得
-        console.log('▲----- Finish HomeFunction feachClass -----▲');
+        console.log('▲----- Finish HomeFunction feachCategory -----▲');
         return await response.json();
 
     } catch (error) {
@@ -75,7 +75,7 @@ export const feachClass = async (): Promise<{ "status": string, "classList"?: ty
         } else {
             console.error('Fetch error:', error);
         }
-        console.log('▲----- Error HomeFunction feachClass -----▲');
+        console.log('▲----- Error HomeFunction feachCategory -----▲');
         return { 'status': AXIOS_ERROR };
     }
 }
@@ -85,13 +85,13 @@ export const feachClass = async (): Promise<{ "status": string, "classList"?: ty
  * 
  * @returns 
  */
-export const createMisstakeHistory = async (
-    classId: number,
+export const createMistakeHistory = async (
+    categoryId: number,
     causeId: number,
     contents: string,
     plan: string
 ): Promise<{ "status": string }> => {
-    console.log('▼----- Start HomeFunction createMisstakeHistory -----▼');
+    console.log('▼----- Start HomeFunction createMistakeHistory -----▼');
     try {
         // postで送るデータ
         const sendData: typeSendData = {
@@ -100,7 +100,7 @@ export const createMisstakeHistory = async (
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                class_id: classId,
+                category_id: categoryId,
                 cause_id: causeId,
                 contents: contents,
                 plan: plan
@@ -108,14 +108,14 @@ export const createMisstakeHistory = async (
         };
 
         // エンドポイントにリクエスト送信
-        const response = await fetch(process.env.REACT_APP_BACKEND_SERVER_URL + '/misstakehistory/create', sendData);
+        const response = await fetch(process.env.REACT_APP_BACKEND_SERVER_URL + '/mistakehistory/create', sendData);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         // 回答の取得
-        console.log('▲----- Finish HomeFunction createMisstakeHistory -----▲');
+        console.log('▲----- Finish HomeFunction createMistakeHistory -----▲');
         return await response.json();
 
     } catch (error) {
@@ -124,7 +124,7 @@ export const createMisstakeHistory = async (
         } else {
             console.error('Fetch error:', error);
         }
-        console.log('▲----- Error HomeFunction createMisstakeHistory -----▲');
+        console.log('▲----- Error HomeFunction createMistakeHistory -----▲');
         return { 'status': AXIOS_ERROR };
     }
 }

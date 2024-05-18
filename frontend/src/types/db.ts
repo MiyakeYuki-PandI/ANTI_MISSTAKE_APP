@@ -8,7 +8,7 @@ export type typeCauseMaster = {
 /**
  * 分類マスターの型
  */
-export type typeClassMaster = {
+export type typeCategoryMaster = {
     value: number;
     label: string;
 }

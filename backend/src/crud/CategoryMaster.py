@@ -4,11 +4,11 @@ from pydantic import BaseModel
 from src import models, schemas
 from sqlalchemy.sql import text
 
-def fetch_class(db: Session) -> List[models.ClassMaster]:
+def fetch_category(db: Session) -> List[models.CategoryMaster]:
     sql = "SELECT"\
-          " class_id"\
-          " ,class_name"\
+          " category_id"\
+          " ,category_name"\
           " FROM" \
-          " M_CLASS"
+          " M_CATEGORY"
     print("SQL:", sql)
     return db.execute(text(sql)).all()

@@ -1,22 +1,22 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class MisstakeHistoryBase(BaseModel):
+class MistakeHistoryBase(BaseModel):
     user_id: int
     create_date:datetime
 
-class MisstakeHistoryCreate(MisstakeHistoryBase):
+class MistakeHistoryCreate(MistakeHistoryBase):
     user_id: int
     create_date:datetime
-    class_id:int
+    category_id:int
     cause_id:int
     contents:str
     plan:str
     
-class MisstakeHistory(MisstakeHistoryBase):
+class MistakeHistory(MistakeHistoryBase):
     user_id: int
     create_date:datetime
-    class_id:int
+    category_id:int
     cause_id:int
     contents:str
     plan:str

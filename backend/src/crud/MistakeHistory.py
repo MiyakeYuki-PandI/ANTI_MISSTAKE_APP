@@ -16,8 +16,8 @@ from datetime import datetime
 #     print("SQL:", sql)
 #     return db.execute(text(sql)).all()
 
-class MisstakeHistoryInput(BaseModel):
-    class_id   : int
+class MistakeHistoryInput(BaseModel):
+    category_id   : int
     cause_id   : int
     contents   : str
     plan       : str
@@ -26,17 +26,17 @@ def create_mistake_history(
     db: Session,
     user_id,
     create_date,
-    mistake_history: schemas.MisstakeHistory
-    ) -> models.MisstakeHistory:
-    db_misstake_history = models.MisstakeHistory(
+    mistake_history: schemas.MistakeHistory
+    ) -> models.MistakeHistory:
+    db_mistake_history = models.MistakeHistory(
         user_id=user_id,
         create_date=create_date,
-        class_id=mistake_history.class_id,
+        category_id=mistake_history.category_id,
         cause_id=mistake_history.cause_id,
         contents=mistake_history.contents,
         plan=mistake_history.plan
     )
-    db.add(db_misstake_history)
+    db.add(db_mistake_history)
     db.commit()
-    db.refresh(db_misstake_history)
-    return db_misstake_history
+    db.refresh(db_mistake_history)
+    return db_mistake_history

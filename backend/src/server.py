@@ -7,7 +7,7 @@ import os
 load_dotenv()
 
 # ルーターの読み込み
-from .routers import auth, cause, _class, misstake_history
+from .routers import auth, category, cause, mistake_history
 
 app = FastAPI()
 
@@ -26,5 +26,5 @@ app.add_middleware(
 # ルーティング
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(cause.router, prefix="/cause", tags=["cause"])
-app.include_router(_class.router, prefix="/class", tags=["class"])
-app.include_router(misstake_history.router, prefix="/misstakehistory", tags=["misstakehistory"])
+app.include_router(category.router, prefix="/category", tags=["category"])
+app.include_router(mistake_history.router, prefix="/mistakehistory", tags=["mistakehistory"])

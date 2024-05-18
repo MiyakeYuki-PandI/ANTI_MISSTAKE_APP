@@ -18,35 +18,38 @@ const InputLoginInfo: React.FC<InputLoginInfoProps> = ({
 
     return (
         <form onSubmit={handleLogin}>
-        <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth label="ユーザー名"
-            onChange={(e) => {
-                e.preventDefault();
-                setUserName(e.target.value);
-            }}
-            value={userName}
-        />
-        <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth label="パスワード" type="password"
-            onChange={(e) => {
-                e.preventDefault();
-                setPassword(e.target.value);
-            }}
-            value={password}
-        />
-        <Button
-            variant="contained"
-            color="primary"
-            fullWidth
-            type="submit"
-        >
-            ログイン
-        </Button>
-    </form>
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                label="ユーザー名"
+                onChange={(e) => {
+                    e.preventDefault();
+                    setUserName(e.target.value);
+                }}
+                value={userName}
+            />
+            <TextField
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                label="パスワード"
+                type="password"
+                onChange={(e) => {
+                    e.preventDefault();
+                    setPassword(e.target.value);
+                }}
+                value={password}
+            />
+            <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                type="submit"
+            >
+                ログイン
+            </Button>
+        </form>
     );
 };
 

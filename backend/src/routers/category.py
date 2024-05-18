@@ -9,8 +9,8 @@ from src import crud, dependencies, schemas, models
 router = APIRouter()
 
 # 分類マスタからレコードを全件取得
-@router.post("/fetchclass")
-async def feach_class(
+@router.post("/fetchcategory")
+async def feach_category(
     input:CheckTokenInput,
     db:Session=Depends(dependencies.get_db)
     ) -> Any:
@@ -18,14 +18,14 @@ async def feach_class(
         # postデータの出力
         print("token:", input.token)
     
-        class_list = crud.fetch_class(db)
-        print("classList:", class_list)
+        category_list = crud.fetch_category(db)
+        print("categoryList:", category_list)
         # 取得したレコードが0件以上の場合、分類マスタのレコードを返す
-        if len(class_list) > 0:
+        if len(category_list) > 0:
             print("OK")
-            return {'status' : 'OK', 'classList' : [class_to_dict(_class) for _class in class_list]}
+            return {'status' : 'OK', 'categoryList' : [category_to_dict(category) for category in category_list]}
         else:
-            error_message = "Fetch classList failed"
+            error_message = "Fetch categoryList failed"
             print("Error：:", error_message)
             return {'status' : 'NG'}
     
@@ -33,16 +33,16 @@ async def feach_class(
         error_message = "Request cancelled by client."
         raise HTTPException(status_code = 400, detail = error_message)
     
-def class_to_dict(_class):
-    """ClassMasterを連想配列に変換
+def category_to_dict(category):
+    """CategoryMasterを連想配列に変換
     
     Args:
-        _class (ClassMaster): ClassMaster(obj)
+        category (CategoryMaster): CategoryMaster(obj)
 
     Returns:
         Array: {"value": int, "labal": str}
     """
     return {
-        "value": _class.class_id,
-        "label": _class.class_name
+        "value": category.category_id,
+        "label": category.category_name
     }

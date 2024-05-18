@@ -1,17 +1,17 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class ClassMasterBase(BaseModel):
+class CategoryMasterBase(BaseModel):
     class_id: int
     class_name: str
 
 
-class ClassMasterCreate(ClassMasterBase):
+class CategoryMasterCreate(CategoryMasterBase):
     class_id: int
     class_name: str
 
 
-class ClassMaster(ClassMasterBase):
+class CategoryMaster(CategoryMasterBase):
     class_id: int
     class_name: str
 
